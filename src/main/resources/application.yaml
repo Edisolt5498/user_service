@@ -40,3 +40,8 @@ user:
   password:
     min:
       length: 6
+
+recommendation:
+  delay:
+    min:
+      months: 6
