@@ -10,7 +10,8 @@ import java.util.stream.Stream;
 public class RecommendationContentContainsFilter implements RecommendationFilter {
     @Override
     public boolean isApplicable(RecommendationFilterDto recommendationFilterDto) {
-        return recommendationFilterDto.contentContains() != null;
+        return recommendationFilterDto.contentContains() != null
+                && !recommendationFilterDto.contentContains().isBlank();
     }
 
     @Override
@@ -19,6 +20,9 @@ public class RecommendationContentContainsFilter implements RecommendationFilter
             RecommendationFilterDto recommendationFilterDto
     ) {
         return recommendations
-                .filter(rec -> rec.getContent().contains(recommendationFilterDto.contentContains()));
+                .filter(
+                        rec -> rec.getContent()
+                                .toLowerCase().contains(recommendationFilterDto.contentContains().toLowerCase())
+                );
     }
 }
